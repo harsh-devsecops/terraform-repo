@@ -30,6 +30,22 @@ pipeline {
                 }
             }
         }
+       stages {
+        stage('Setup') {
+            steps {
+                script {
+                    // Install Terraform tool
+                    tool name: 'Terraform', type: 'org.jenkinsci.plugins.workflow.steps.ToolStep',
+                         installCommand: """
+                         set -e
+                         wget -O terraform.zip https://releases.hashicorp.com/terraform/0.15.0/terraform_0.15.0_linux_amd64.zip
+                         unzip terraform.zip
+                         """
+                    }
+                }
+            }
+        }
+
         stage('Terraform Init') {
             steps {
                 script {
@@ -37,7 +53,8 @@ pipeline {
                 }
             }
         }
-        stage('validate') {
+
+        stage('Validate') {
             steps {
                 script {
                     sh 'terraform validate'
