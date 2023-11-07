@@ -31,7 +31,8 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 script {
-                    sh "terraform init"
+                    echo 'init applied'
+                    sh 'terraform init'
                 }
             }
         }
