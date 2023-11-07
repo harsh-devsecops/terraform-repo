@@ -35,7 +35,7 @@ pipeline {
             steps {
                 echo 'Initializing Terraform'
                 script {
-                    sh "${TERRAFORM_HOME}/terraform init"
+                    sh 'terraform init'
                 }
             }
         }
