@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     echo 'init applied'
-                    sh 'terraform init'
+                    sh './script.sh'
                 }
             }
         }
