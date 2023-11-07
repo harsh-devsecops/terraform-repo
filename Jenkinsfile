@@ -40,7 +40,7 @@ pipeline {
         }
 
         // Add similar echo statements for other stages
-
+    }
     
 
     post {
@@ -55,7 +55,7 @@ pipeline {
         }
     }
 }
-}
+
 
 
 
