@@ -30,13 +30,20 @@ pipeline {
                 }
             }
         }
- stage('Terraform Init'){
-steps{
-script{
-sh 'terraform init'
-}
-}
-}
+        stage('Terraform Init') {
+            steps {
+                script {
+                    sh 'terraform init'
+                }
+            }
+        }
+        stage('validate') {
+            steps {
+                script {
+                    sh 'terraform validate'
+                }
+            }
+        }
 
         // Add similar echo statements for other stages
     }
