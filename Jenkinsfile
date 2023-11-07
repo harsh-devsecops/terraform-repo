@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([azureServicePrincipal(credentialsId:AppService_Principal , usePassword: true)]) {
-                        sh "az login --service-principal -u 24e73939-f71e-41ec-97d9-de9032b8df92 -p BGo8Q~bbMICd6C2XGFIyRkgwVrQUsEfkC3Uswdnh--tenant 87fa2b03-576c-440b-93a5-b22dbb2e0c6d"
+                        sh "az login --service-principal -u '24e73939-f71e-41ec-97d9-de9032b8df92' -p 'BGo8Q~bbMICd6C2XGFIyRkgwVrQUsEfkC3Uswdnh' --tenant '87fa2b03-576c-440b-93a5-b22dbb2e0c6d' "
                     }
                 }
             }
