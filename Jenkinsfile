@@ -11,11 +11,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out code from Git'
-                git(
-                    branch: 'main',
-                    url: 'https://github.com/git01h/terraform-repo.git',
-                    credentialsId: 'git_credentials'
-                )
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/git01h/terraform-repo.git']])
+               
             }
         }
 
