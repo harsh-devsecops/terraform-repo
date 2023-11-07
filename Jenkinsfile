@@ -25,7 +25,7 @@ pipeline {
                     echo 'Logging in to Azure'
                     // Login to Azure
                     withCredentials([azureServicePrincipal(credentialsId: 'AppService_Principal', varAzureSubscriptionId:'3d193e7b-bd4f-4cb1-becb-e31d4d51e3aa' , varAzureTenantId:'87fa2b03-576c-440b-93a5-b22dbb2e0c6d', varAzureClientSecret:'BGo8Q~bbMICd6C2XGFIyRkgwVrQUsEfkC3Uswdnh', varAzureClientId:'24e73939-f71e-41ec-97d9-de9032b8df92' )]) {
-                        sh "az login --service-principal -u "24e73939-f71e-41ec-97d9-de9032b8df92" -p "BGo8Q~bbMICd6C2XGFIyRkgwVrQUsEfkC3Uswdnh" --tenant "87fa2b03-576c-440b-93a5-b22dbb2e0c6d" "
+                        sh "az login --service-principal -u '24e73939-f71e-41ec-97d9-de9032b8df92',-p 'BGo8Q~bbMICd6C2XGFIyRkgwVrQUsEfkC3Uswdnh',--tenant '87fa2b03-576c-440b-93a5-b22dbb2e0c6d' "
                     }
                 }
             }
