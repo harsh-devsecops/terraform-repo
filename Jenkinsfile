@@ -1,11 +1,7 @@
 pipeline {
     agent any
     environment {
-        // Define environment variables for Azure credentials
-        AZURE_SUBSCRIPTION_ID = "3d193e7b-bd4f-4cb1-becb-e31d4d51e3aa"
-        AZURE_TENANT_ID = "87fa2b03-576c-440b-93a5-b22dbb2e0c6d"
-        AZURE_CLIENT_ID = "24e73939-f71e-41ec-97d9-de9032b8df92"
-        AZURE_CLIENT_SECRET = "BGo8Q~bbMICd6C2XGFIyRkgwVrQUsEfkC3Uswdnh"
+      
     }
     stages {
         stage('Checkout') {
