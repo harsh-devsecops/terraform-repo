@@ -33,7 +33,6 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                echo 'Initializing Terraform'
                 script {
                     sh 'terraform init'
                 }
@@ -42,7 +41,7 @@ pipeline {
 
         // Add similar echo statements for other stages
 
-    }
+    
 
     post {
         always {
@@ -56,7 +55,7 @@ pipeline {
         }
     }
 }
-
+}
 
 
 
