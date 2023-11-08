@@ -36,24 +36,36 @@ pipeline {
                 }
             }
         }
-
-        // Add similar echo statements for other stages
-    }
-    
-
-    post {
-        always {
-            // Clean up or post-processing steps can be added here
-            script {
-                echo 'Logging out from Azure'
-                withCredentials([azureServicePrincipal(credentialsId: 'AppService_Principal', usePassword: true)]) {
-                    sh "az logout"
+        stage('terraform validate') {
+            steps {
+                script {
+                    sh 'terraform validate'
+                }
+            }
+        }    
+        stage('Terraform Plan') {
+            steps {
+                script {
+                    sh 'terraform plan'
+                }
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    sh 'terraform apply --auto-approve'
+                }
+            }
+        }
+        stage('terraform destroy') {
+            steps {
+                script {
+                    sh 'terraform destroy --auto-approve'
                 }
             }
         }
     }
 }
-
 
 
 
