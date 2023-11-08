@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent anyoptions {
+  ansiColor('xterm')
+}
     environment {
        // Define environment variables for Azure credentials
         ARM_SUBSCRIPTION_ID = "3d193e7b-bd4f-4cb1-becb-e31d4d51e3aa"
