@@ -1,7 +1,7 @@
 pipeline {
     agent any
 options {
-  ansiColor('css')
+  ansiColor('gnome-terminal')
 }
     environment {
        // Define environment variables for Azure credentials
