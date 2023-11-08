@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    options {
-  ansiColor('xterm')
+options {
+  ansiColor('css')
 }
     environment {
        // Define environment variables for Azure credentials
