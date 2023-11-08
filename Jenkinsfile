@@ -36,20 +36,20 @@ pipeline {
                 }
             }
         }
-        // stage('Terraform Apply') {
-        //     steps {
-        //         script {
-        //             sh 'terraform apply --auto-approve'
-        //         }
-        //     }
-        // }
-        // stage('terraform destroy') {
-        //     steps {
-        //         script {
-        //             sh 'terraform destroy --auto-approve'
-        //         }
-        //     }
-        // }
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    sh 'terraform apply --auto-approve'
+                }
+            }
+        }
+        stage('terraform destroy') {
+            steps {
+                script {
+                    sh 'terraform destroy --auto-approve'
+                }
+            }
+        }
     }
 }
 
