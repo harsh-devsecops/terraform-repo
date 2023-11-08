@@ -20,41 +20,43 @@ pipeline {
         }
         stage('Terraform init') {
             steps {
+                timeout(time: 01, unit: "MINUTES") {
+	                    input message: 'Do you want to approve the deployment?', ok: 'Yes'
                 script {
                     sh 'terraform init'
                 }
             }
         }
-        stage('terraform validate') {
-            steps {
-                script {
-                    sh 'terraform validate'
-                }
-            }
-        }    
-        stage('Terraform Plan') {
-            steps {
-                script {
-                    sh 'terraform plan'
-                }
-            }
-        }
-        stage('Terraform Apply') {
-            steps {
-                script {
-                    sh 'terraform apply --auto-approve'
-                }
-            }
-        }
-        stage('terraform destroy') {
-            steps {
-                script {
-                    sh 'terraform destroy --auto-approve'
-                }
-            }
-        }
+        // stage('terraform validate') {
+        //     steps {
+        //         script {
+        //             sh 'terraform validate'
+        //         }
+        //     }
+        // }    
+        // stage('Terraform Plan') {
+        //     steps {
+        //         script {
+        //             sh 'terraform plan'
+        //         }
+        //     }
+        // }
+        // stage('Terraform Apply') {
+        //     steps {
+        //         script {
+        //             sh 'terraform apply --auto-approve'
+        //         }
+        //     }
+        // }
+        // stage('terraform destroy') {
+        //     steps {
+        //         script {
+        //             sh 'terraform destroy --auto-approve'
+        //         }
+        //     }
+        // }
     }
 }
-
+}
 
 
