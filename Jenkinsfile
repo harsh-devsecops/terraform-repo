@@ -21,7 +21,7 @@ pipeline {
         stage('Terraform init') {
             steps {
                 script {
-                    sh 'terraform init -no-color'
+                    sh 'terraform init'
                 }
             }
         }
