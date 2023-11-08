@@ -24,34 +24,34 @@ pipeline {
                 }
             }
         }
-        stage('terraform validate') {
-            steps {
-                script {
-                    sh 'terraform validate -no-color'
-                }
-            }
-        }    
-        stage('Terraform Plan') {
-            steps {
-                script {
-                    sh 'terraform plan -no-color'
-                }
-            }
-        }
-        stage('Terraform Apply') {
-            steps {
-                script {
-                    sh 'terraform apply --auto-approve -no-color'
-                }
-            }
-        }
-        stage('terraform destroy') {
-            steps {
-                script {
-                    sh 'terraform destroy --auto-approve -no-color'
-                }
-            }
-        }
+        // stage('terraform validate') {
+        //     steps {
+        //         script {
+        //             sh 'terraform validate -no-color'
+        //         }
+        //     }
+        // }    
+        // stage('Terraform Plan') {
+        //     steps {
+        //         script {
+        //             sh 'terraform plan -no-color'
+        //         }
+        //     }
+        // }
+        // stage('Terraform Apply') {
+        //     steps {
+        //         script {
+        //             sh 'terraform apply --auto-approve -no-color'
+        //         }
+        //     }
+        // }
+        // stage('terraform destroy') {
+        //     steps {
+        //         script {
+        //             sh 'terraform destroy --auto-approve -no-color'
+        //         }
+        //     }
+        // }
     }
 }
 
