@@ -35,27 +35,32 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 script {
-                    sh 'terraform plan'
+                    sh 'terraform plan -out=plan.out'
                 }
             }
         }
-        stage('Terraform Apply') {
-            steps {
-		    timeout(time: 01, unit: "MINUTES") {
-	                    input message: 'Do you want to approve the deployment?', ok: 'Yes'
-                script {
-                    sh 'terraform apply --auto-approve'
-                }
-            }
+      stage('Conditional Terraform Apply') {
+    when {
+        expression {
+            // Only apply if the plan was successful
+            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
         }
-	}
-        stage('terraform destroy') {
-            steps {
-                script {
-                    sh 'terraform destroy --auto-approve'
-                }
-            }
+    }
+    steps('Terraform Apply') {
+        script {
+            // Run Terraform apply using the saved plan file
+            sh 'terraform apply "plan.out"'
         }
+    }
+}
+
+        // stage('terraform destroy') {
+        //     steps {
+        //         script {
+        //             sh 'terraform destroy --auto-approve'
+        //         }
+        //     }
+        // }
     }
 }
 	
