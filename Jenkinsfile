@@ -32,17 +32,18 @@ pipeline {
                 }
             }
         } 
-	
+	*always{
         stage('Terraform Plan') {
 		when {
 			expression{choice =='Plan'}
-		}
             steps {
                 script {
                     sh 'terraform plan -out=plan.out'
                 }
+			}
             }
         }
+	}*
       stage(' Terraform Apply') {
 	when{
 			expression{choice =='Apply'}
