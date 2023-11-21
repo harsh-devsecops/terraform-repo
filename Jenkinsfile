@@ -43,17 +43,11 @@ pipeline {
                 }
             }
         }
-      stage('Conditional Terraform Apply') {
-	      when{
+      stage(' Terraform Apply') {
+	when{
 			expression{choice=='Apply'}
 		}
-    when {
-        expression {
-            // Only apply if the plan was successful
-            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
-        }
-    }
-    steps('Terraform Apply') {
+    steps{
         script {
             // Run Terraform apply using the saved plan file
             sh 'terraform apply "plan.out"'
