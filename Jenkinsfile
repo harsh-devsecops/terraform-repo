@@ -31,8 +31,18 @@ pipeline {
                     sh 'terraform validate'
                 }
             }
-        }    
+        } 
+	     stage('Conditional Terraform Plan') {
+    when {
+        expression {
+            // Only plan if the validate was successful
+            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
+        }
+    }
         stage('Terraform Plan') {
+		when{
+			expression{choice=='plan'}
+		}
             steps {
                 script {
                     sh 'terraform plan -out=plan.out'
@@ -40,6 +50,9 @@ pipeline {
             }
         }
       stage('Conditional Terraform Apply') {
+	      when{
+			expression{choice=='Apply'}
+		}
     when {
         expression {
             // Only apply if the plan was successful
@@ -55,6 +68,9 @@ pipeline {
 }
 
         stage('terraform destroy') {
+		when{
+			expression{choice=='Destroy'}
+		}
             steps {
                 script {
                     sh 'terraform destroy --auto-approve'
