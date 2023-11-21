@@ -34,11 +34,11 @@ pipeline {
         } 
         stage('Terraform Plan') {
 	when {
+			expression{choice =='Plan'||'Apply'||'Destroy'}
+	}
 		expression{
 		return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
 		}
-			expression{choice =='Plan'||'Apply'||'Destroy'}
-	}
             steps {
                 script {
                     sh 'terraform plan -out=plan.out'
@@ -49,10 +49,13 @@ pipeline {
       stage(' Terraform Apply') {
 	when{
 			expression{choice == 'Apply'}
-		
+		}
+	      expression{
+		return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
 		}
     steps{
         script {
+		input "Please approve to proceed with Apply"
             // Run Terraform apply using the saved plan file
             sh 'terraform apply "plan.out"'
         }
@@ -61,10 +64,13 @@ pipeline {
         stage('terraform destroy') {
 		when{
 			expression{choice =='Destroy'}
-			
+		} 
+	expression{
+		return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
 		}
             steps {
                 script {
+			input "Please approve to proceed with Destroy"
                     sh 'terraform destroy --auto-approve'
                 }
             }
