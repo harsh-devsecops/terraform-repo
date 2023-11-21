@@ -46,39 +46,30 @@ pipeline {
       stage(' Terraform Apply') {
 	when{
 			expression{choice == 'Apply'}
+		return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
 		}
     steps{
         script {
-		when {
-        expression {
-            // Only apply if the plan was successful
-            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
-        }
             // Run Terraform apply using the saved plan file
             sh 'terraform apply "plan.out"'
         }
     }
 }
-
         stage('terraform destroy') {
 		when{
 			expression{choice =='Destroy'}
+			return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
 		}
             steps {
                 script {
-			when {
-        expression {
-            // Only apply if the plan was successful
-            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
-        }
                     sh 'terraform destroy --auto-approve'
                 }
             }
         }
     }
 }
-    }
-}
+    
+
 
 
 
