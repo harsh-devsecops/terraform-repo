@@ -32,13 +32,7 @@ pipeline {
                 }
             }
         } 
-	     stage('Conditional Terraform Plan') {
-    when {
-        expression {
-            // Only plan if the validate was successful
-            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
-        }
-    }
+	
         stage('Terraform Plan') {
 		when{
 			expression{choice=='plan'}
@@ -80,7 +74,7 @@ pipeline {
     }
 }
 	
-}
+
 
 
 
