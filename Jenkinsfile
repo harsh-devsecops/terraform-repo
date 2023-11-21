@@ -34,7 +34,9 @@ pipeline {
         } 
         stage('Terraform Plan') {
 	when {
+		expression{
 		return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
+		}
 			expression{choice =='Plan'||'Apply'||'Destroy'}
 	}
             steps {
