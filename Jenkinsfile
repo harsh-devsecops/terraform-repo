@@ -49,6 +49,11 @@ pipeline {
 		}
     steps{
         script {
+		when {
+        expression {
+            // Only apply if the plan was successful
+            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
+        }
             // Run Terraform apply using the saved plan file
             sh 'terraform apply "plan.out"'
         }
@@ -61,6 +66,11 @@ pipeline {
 		}
             steps {
                 script {
+			when {
+        expression {
+            // Only apply if the plan was successful
+            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
+        }
                     sh 'terraform destroy --auto-approve'
                 }
             }
