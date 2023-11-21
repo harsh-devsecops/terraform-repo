@@ -34,7 +34,7 @@ pipeline {
         } 
 	
         stage('Terraform Plan') {
-		when{
+		if {
 			expression{choice=='plan'}
 		}
             steps {
