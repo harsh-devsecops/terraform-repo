@@ -34,7 +34,7 @@ pipeline {
         } 
         stage('Terraform Plan') {
 	when {
-			expression{choice =='Plan','Apply','Destroy'}
+			expression{choice =='Plan'||'Apply'||'Destroy'}
 	}
             steps {
                 script {
