@@ -34,6 +34,7 @@ pipeline {
         } 
         stage('Terraform Plan') {
 	when {
+		return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
 			expression{choice =='Plan'||'Apply'||'Destroy'}
 	}
             steps {
@@ -46,7 +47,7 @@ pipeline {
       stage(' Terraform Apply') {
 	when{
 			expression{choice == 'Apply'}
-		return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
+		
 		}
     steps{
         script {
@@ -58,7 +59,7 @@ pipeline {
         stage('terraform destroy') {
 		when{
 			expression{choice =='Destroy'}
-			return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
+			
 		}
             steps {
                 script {
