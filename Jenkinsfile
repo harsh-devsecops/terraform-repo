@@ -32,7 +32,6 @@ pipeline {
                 }
             }
         } 
-	    if 
         stage('Terraform Plan') {
 	when {
 			expression{choice =='Plan'}
