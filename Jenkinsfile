@@ -25,6 +25,16 @@ pipeline {
                 }
             }
         }
+	    stage('Terraform Import') {
+		    when{
+			expression{choice == 'Import' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
+		}
+            steps {
+                script {
+                    sh "terraform import ${params.Arguments}"
+                }
+            }
+        }
         stage('terraform validate') {
             steps {
                 script {
@@ -34,10 +44,8 @@ pipeline {
         } 
         stage('Terraform Plan') {
 	when {
-		expression{
-		return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
-		}
-			expression{choice =='Plan'||'Apply'||'Destroy'}
+		
+			expression{choice =='Plan'||'Apply'||'Destroy' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
 	}
             steps {
                 script {
@@ -48,10 +56,8 @@ pipeline {
 	
       stage(' Terraform Apply') {
 	when{
-		expression{
-		return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
-		}
-			expression{choice == 'Apply'}
+		
+			expression{choice == 'Apply' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
 		}
     steps{
         script {
@@ -63,10 +69,8 @@ pipeline {
 }
         stage('terraform destroy') {
 		when{
-			expression{
-		return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
-		}
-			expression{choice =='Destroy'}
+		
+			expression{choice =='Destroy' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
 		} 
             steps {
                 script {
