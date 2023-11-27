@@ -35,7 +35,7 @@ pipeline {
         stage('Terraform Plan') {
 	when {
 		
-			expression{choice =='Plan'||'Apply'||'Destroy' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
+			expression{choice =='Plan'||'Apply'||'Destroy' &&  currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
 	}
             steps {
                 script {
@@ -47,7 +47,7 @@ pipeline {
       stage(' Terraform Apply') {
 	when{
 		
-			expression{choice == 'Apply' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
+			expression{choice == 'Apply' &&  currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
 		}
     steps{
         script {
@@ -60,7 +60,7 @@ pipeline {
         stage('terraform destroy') {
 		when{
 		
-			expression{choice =='Destroy' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
+			expression{choice =='Destroy' &&  currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
 		} 
             steps {
                 script {
@@ -69,7 +69,7 @@ pipeline {
                 }
 		    stage('Terraform Import') {
 		    when{
-			expression{choice =='Import' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
+			expression{choice =='Import' &&  params.Arguments !=""}
 		}
             steps {
                 script {
