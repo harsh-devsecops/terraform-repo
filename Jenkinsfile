@@ -11,10 +11,9 @@ pipeline {
         ARM_CLIENT_SECRET = credentials('CLIENT_SECRET')
     }
     stages {
-	
-            terraform_state_option = params.Arguments.split()[0]
         
         stage('Checkout') {
+		terraform_state_option = params.Arguments.split()[0]
             steps {
                 echo 'Checking out code from Git'
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/git01h/terraform-repo.git']])
