@@ -11,6 +11,9 @@ pipeline {
         ARM_CLIENT_SECRET = credentials('CLIENT_SECRET')
     }
     stages {
+	     script {
+            terraform_state_option = params.Arguments.split()[0]
+        }
         stage('Checkout') {
             steps {
                 echo 'Checking out code from Git'
@@ -79,12 +82,14 @@ pipeline {
                 }
             }
         }
-	    if (choice == 'State'){
-terraform_state_option =params.Arguments.split()[0]
+	    //if (choice == 'State'){
+//terraform_state_option =params.Arguments.split()[0]
 stage ("terraform state ${terraform_state_option}"){
 	when{
 		expression{choice == 'State' && params.Arguments != ""}
 	}
+	steps {
+                script {
 	    if (terraform_state_option == "Remove") {
     input "please approve for remove"
     sh "terraform state ${params.Arguments}"
@@ -98,6 +103,8 @@ stage ("terraform state ${terraform_state_option}"){
         }
     
 }
+}
+    }
 }
 
     
