@@ -91,7 +91,7 @@ pipeline {
 	    terraform_state_option =params.Arguments.split()[0]
  	    if (terraform_state_option == "Remove") {
      input "please approve for remove"
-     sh "terraform state ${params.Arguments.split()[1]}"
+     sh "terraform state rm ${params.Arguments.split()[1]}"
  } else if (terraform_state_option == "show") {
      sh "terraform state ${params.Arguments}"
  } else {
