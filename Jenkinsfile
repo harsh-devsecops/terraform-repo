@@ -67,6 +67,8 @@ pipeline {
 			input "Please approve to proceed with Destroy"
                     sh 'terraform destroy --auto-approve'
                 }
+	    }
+	}
 		    stage('Terraform Import') {
 		    when{
 			expression{choice =='Import' &&  params.Arguments !=""}
@@ -79,8 +81,8 @@ pipeline {
         }
             }
         }
-    }
-}
+    
+
     
 
 
