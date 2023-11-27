@@ -87,6 +87,7 @@ steps {
                 script {
 		}
 }
+}
 	stage ('terraform state ${terraform_state_option}'){
 	when{
 		expression{choice == 'State' && params.Arguments != ""}
