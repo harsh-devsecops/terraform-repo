@@ -82,25 +82,26 @@ pipeline {
 	    //if (choice == 'State'){
 //terraform_state_option =params.Arguments.split()[0]
 
-// 	stage ('terraform state ${terraform_state_option}'){
-// 	when{
-// 		expression{choice == 'State' && params.Arguments != ""}
-// 	}
-// 	steps {
-//                 script {
-// 	    if (terraform_state_option == "Remove") {
-//     input "please approve for remove"
-//     sh "terraform state ${params.Arguments}"
-// } else if (terraform_state_option == "show") {
-//     sh "terraform state ${params.Arguments}"
-// } else {
-//     sh "terraform state ${params.Arguments}"
-// }
+ 	stage ('terraform state ${terraform_state_option}'){
+ 	when{
+ 		expression{choice == 'State' && params.Arguments != ""}
+ 	}
+ 	steps {
+                 script {
+	    terraform_state_option =params.Arguments.split()[0]
+ 	    if (terraform_state_option == "Remove") {
+     input "please approve for remove"
+     sh "terraform state ${params.Arguments}"
+ } else if (terraform_state_option == "show") {
+     sh "terraform state ${params.Arguments}"
+ } else {
+     sh "terraform state ${params.Arguments}"
+ }
 
-//             }
-//         }
+             }
+         }
     
-// }
+ }
 }
     }
 
