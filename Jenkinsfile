@@ -84,6 +84,8 @@ pipeline {
 //terraform_state_option =params.Arguments.split()[0]
 stage ('terraform state ${terraform_state_option}'){
 	terraform_state_option =params.Arguments.split()[0]
+}
+	stage ('terraform state ${terraform_state_option}'){
 	when{
 		expression{choice == 'State' && params.Arguments != ""}
 	}
