@@ -25,16 +25,6 @@ pipeline {
                 }
             }
         }
-	    stage('Terraform Import') {
-		    when{
-			expression{choice =='Import' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
-		}
-            steps {
-                script {
-                    sh "terraform import ${params.Arguments}"
-                }
-            }
-        }
         stage('terraform validate') {
             steps {
                 script {
@@ -77,6 +67,16 @@ pipeline {
 			input "Please approve to proceed with Destroy"
                     sh 'terraform destroy --auto-approve'
                 }
+		    stage('Terraform Import') {
+		    when{
+			expression{choice =='Import' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
+		}
+            steps {
+                script {
+                    sh "terraform import ${params.Arguments}"
+                }
+            }
+        }
             }
         }
     }
