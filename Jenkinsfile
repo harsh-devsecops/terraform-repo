@@ -95,7 +95,7 @@ pipeline {
  } else if (terraform_state_option == "Show") {
      sh "terraform state show ${params.Arguments.split()[1]}"
  } else {
-     sh "terraform state list ${params.Arguments}"
+     sh "terraform state list "
  }
 
              }
