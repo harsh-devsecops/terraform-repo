@@ -27,7 +27,7 @@ pipeline {
         }
 	    stage('Terraform Import') {
 		    when{
-			expression{choice == 'Import' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
+			expression{choice =='Import' && return currentBuild.resultIsBetterOrEqualTo('SUCCESS')}
 		}
             steps {
                 script {
