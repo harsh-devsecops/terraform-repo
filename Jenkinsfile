@@ -81,8 +81,9 @@ pipeline {
             }
         }
 	    //if (choice == 'State'){
-terraform_state_option =params.Arguments.split()[0]
+//terraform_state_option =params.Arguments.split()[0]
 stage ('terraform state ${terraform_state_option}'){
+	terraform_state_option =params.Arguments.split()[0]
 	when{
 		expression{choice == 'State' && params.Arguments != ""}
 	}
