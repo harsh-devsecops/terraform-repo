@@ -71,7 +71,7 @@ pipeline {
 	}
 		    stage('Terraform Import') {
 		    when{
-			expression{choice =='Import' &&  params.Arguments !=""}
+			expression{choice =='Import' && params.Arguments != ""}
 		}
             steps {
                 script {
