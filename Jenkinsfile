@@ -84,7 +84,7 @@ pipeline {
 
  	stage ('terraform state ${terraform_state_option}'){
  	when{
- 		expression{choice == 'State' && params.Arguments != ""}
+ 		expression{choice == 'State' && params.Arguments != " "}
  	}
  	steps {
                  script {
@@ -92,10 +92,10 @@ pipeline {
  	    if (terraform_state_option == "Remove") {
      input "please approve for remove"
      sh "terraform state rm ${params.Arguments.split()[1]}"
- } else if (terraform_state_option == "show") {
-     sh "terraform state ${params.Arguments}"
+ } else if (terraform_state_option == "Show") {
+     sh "terraform state show ${params.Arguments.split()[1]}"
  } else {
-     sh "terraform state ${params.Arguments}"
+     sh "terraform state list ${params.Arguments}"
  }
 
              }
