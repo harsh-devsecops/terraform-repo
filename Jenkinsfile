@@ -88,10 +88,11 @@ pipeline {
  	}
  	steps {
                  script {
-	    terraform_state_option =params.Arguments.split()[0]
+	   def terraform_state_option = params.Arguments.split()[0]
+			 def terraformStateResource= params.Arguments.split()[1]
  	    if (terraform_state_option == "Remove") {
      input "please approve for remove"
-     sh "terraform state rm ${params.Arguments.split()[1]}"
+     sh "terraform state rm ${terraformStateResource}"
  } else if (terraform_state_option == "Show") {
      sh "terraform state show ${params.Arguments.split()[1]}"
  } else {
