@@ -13,7 +13,6 @@ pipeline {
     stages {
         
         stage('Checkout') {
-		terraform_state_option = params.Arguments.split()[0]
             steps {
                 echo 'Checking out code from Git'
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/git01h/terraform-repo.git']])
@@ -82,7 +81,7 @@ pipeline {
             }
         }
 	    //if (choice == 'State'){
-//terraform_state_option =params.Arguments.split()[0]
+terraform_state_option =params.Arguments.split()[0]
 stage ('terraform state ${terraform_state_option}'){
 	when{
 		expression{choice == 'State' && params.Arguments != ""}
