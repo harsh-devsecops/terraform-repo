@@ -94,7 +94,7 @@ pipeline {
     if (terraformStateAction == 'list') {
         sh 'terraform state list'
     } else if (terraformStateAction == 'show') {
-        sh "terraform state show '${terraformStateResource}'"
+        sh 'terraform  show'
     } else if (terraformStateAction == 'rm') {
         sh 'terraform state list'
         input 'Please confirm to proceed with Terraform State Remove'
