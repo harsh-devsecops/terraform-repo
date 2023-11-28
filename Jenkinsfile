@@ -88,24 +88,22 @@ pipeline {
  	}
  	steps {
                  script {
-			 def terraformStateAction = params.Arguments.split(' ')[0]
-                        def terraformStateResource = params.Arguments.split(' ')[1]
+    def terraformStateAction = params.Arguments.split(' ')[0]
+    def terraformStateResource = params.Arguments.split(' ')[1]
 
-                        if (terraformStateAction == 'list') {
-                                    sh "terraform state list"
-                                    }
-                        else if (terraformStateAction == 'show') {
-				sh 'terraform state list'
-                                    sh "terraform state show '${terraformStateResource}'"
-                                    } 
-                        if (terraformStateAction == 'rm') {
-                        sh 'terraform state list'
-                        input "Please confirm to proceed with Terraform State Remove"
-                        sh "terraform state rm '${terraformStateResource}'"
-                                    } 
-			 else {
-                        echo 'better luck next time '
-                                     }
+    if (terraformStateAction == 'list') {
+        sh 'terraform state list'
+    } else if (terraformStateAction == 'show') {
+        sh "terraform state show '${terraformStateResource}'"
+    } else if (terraformStateAction == 'rm') {
+        sh 'terraform state list'
+        input 'Please confirm to proceed with Terraform State Remove'
+        sh "terraform state rm '${terraformStateResource}'"
+    } else {
+        error "Invalid terraformStateAction: ${terraformStateAction}. Supported actions are 'list', 'show', and 'rm'."
+    }
+}
+
 	 
 
              }
@@ -113,7 +111,7 @@ pipeline {
     
  }
 }
-    }
+    
 
 
     
