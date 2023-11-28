@@ -92,7 +92,7 @@ pipeline {
     def terraformStateResource = params.Arguments.split(' ')[1]
 
     if (terraformStateAction == 'list') {
-        sh 'terraform state list'
+        sh 'terraform state list -debug'
     } else if (terraformStateAction == 'show') {
         sh "terraform state show '${terraformStateResource}'"
     } else if (terraformStateAction == 'rm') {
