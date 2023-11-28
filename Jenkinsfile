@@ -82,7 +82,7 @@ pipeline {
 	    //if (choice == 'State'){
 //terraform_state_option =params.Arguments.split()[0]
 
- 	stage ('terraform state ${terraform_state_option}'){
+ 	stage ('terraform state ${  }'){
  	when{
  		expression{choice == 'State' && params.Arguments != " "}
  	}
@@ -102,6 +102,9 @@ pipeline {
                         input "Please confirm to proceed with Terraform State Remove"
                         sh "terraform state rm '${terraformStateResource}'"
                                     } 
+			 else {
+                        echo 'better luck next time '
+                                     }
 	 
 
              }
