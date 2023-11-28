@@ -95,6 +95,7 @@ pipeline {
                                     sh "terraform state list"
                                     }
                         else if (terraformStateAction == 'show') {
+				sh 'terraform state list'
                                     sh "terraform state show '${terraformStateResource}'"
                                     } 
                         if (terraformStateAction == 'rm') {
