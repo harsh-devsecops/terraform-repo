@@ -1,4 +1,5 @@
 pipeline {
+	properties([parameters([choice(name: 'ACTION', choices: ['Plan', 'Apply', 'Destroy'], description: 'Select Terraform Action')])])
     agent any
     options {
   ansiColor('css')
